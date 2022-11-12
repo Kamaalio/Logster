@@ -79,6 +79,16 @@ public struct Logster {
         info(messages.joined(separator: "; "))
     }
 
+    /// To log debugging messages. Beaware of that logs only get stored when `DEBUG` compiler flag is turned on.
+    /// - Parameter message: The message to log.
+    public func debug(_ message: String) {
+        logger.debug("\(message)")
+
+        #if DEBUG
+        addLogToQueue(type: .debug, message: message)
+        #endif
+    }
+
     private func addLogToQueue(type: HoldedLog.LogTypes, message: String) {
         guard let holder else { return }
 
