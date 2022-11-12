@@ -55,6 +55,17 @@ final class LogsterTests: XCTestCase {
         XCTAssertEqual(log.type.color, .green)
     }
 
+    func testDebugLogged() async throws {
+        let message = "What are thoooose"
+        logger.debug(message)
+
+        let log = try await getLog()
+        XCTAssert(log.message.contains(message))
+        XCTAssertEqual(log.label, String(describing: LogsterTests.self))
+        XCTAssertEqual(log.type, .debug)
+        XCTAssertEqual(log.type.color, .gray)
+    }
+
     private func getLog() async throws -> HoldedLog {
         var log: HoldedLog!
         try await expectToEventually({

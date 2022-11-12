@@ -59,6 +59,7 @@ public struct HoldedLog: Hashable {
         case error
         case warning
         case info
+        case debug
 
         /// Representation color.
         public var color: Color {
@@ -69,6 +70,8 @@ public struct HoldedLog: Hashable {
                 return .yellow
             case .error:
                 return .red
+            case .debug:
+                return .gray
             }
         }
     }
